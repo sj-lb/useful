@@ -16,3 +16,13 @@ function psj(){
     ps aux|grep -v grep|grep -E "PID$target"
 }
 export -f psj
+
+export GIT_SQ_BASE='/home/johnny/git/sqream'
+cdsq(){
+    cd $GIT_SQ_BASE/$1
+}
+export -f cdsq
+_cdsq_cmplt() {
+    COMPREPLY=($( (cdsq && compgen -d -- ${COMP_WORDS[COMP_CWORD]}) ))
+}
+complete -F _cdsq_cmplt cdsq
